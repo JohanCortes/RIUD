@@ -1,0 +1,80 @@
+<p>item works!</p>
+
+<div class="container ">
+
+    <div class="row pestaña ">
+        <div class="col-8 m-2 ">
+            <h1>
+                {{dato.title}}
+            </h1>
+            <h3>
+                {{dato.titulo}}
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4 m-5 P-3 ">
+            <div class="row">
+                <h3 class="titulo">
+                    Autora/Autor/autores
+                </h3>
+                <h4 *ngFor="let item of dato.autor">
+                    {{item}} ,
+                </h4>
+            </div>
+        </div>
+
+        <div class="col-6 m-5 P-3 ">
+            <div class="row">
+                <h3 class="titulo">
+                    Abstract
+                </h3>
+                <h4>
+                    <p>
+                        {{dato.resumen}}
+                    </p>
+                </h4>
+            </div>
+            <div class="row">
+                <h3 class="titulo">
+                    Fecha de publicacion
+                </h3>
+                <h4>
+                    <p>
+                        {{dato.abstract}}
+                    </p>
+                </h4>
+            </div>
+        </div>
+        <hr>
+        <div class="row m-4">
+            <h3 class="titulo">
+                Enlaces
+            </h3>
+            <h4 *ngFor="let item of dato.uri">
+                <a href="{{item}}">
+                    {{item}}
+                </a>
+            </h4>
+        </div>
+        <div class="row m-4">
+            <h3 class="titulo">
+                URI
+            </h3>
+            <h4>
+                <a href={{dato.enlace}}>
+                    {{dato.enlace}}
+                </a>
+            </h4>
+        </div>
+        <div class="row m-4">
+            <h3 class="titulo">
+                Grafo
+            </h3>
+            <h4>
+                <a id="grafo" href={{dato.grafo}}></a>
+            </h4>
+        </div>
+    </div>
+</div>

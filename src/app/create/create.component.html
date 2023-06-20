@@ -1,0 +1,88 @@
+<form [formGroup]="rdfForm" (ngSubmit)="onSubmit()">
+
+  <div class="fluid-container col-8 m-4 p-5" id="main-container">
+    <h1>Crear nuevo registro </h1>
+    <h5>En caso de agregar varios items a un mismo campo separelos por una coma ","</h5>
+    <hr />
+    <div class="row g-2 p-3">
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="text" formControlName="autor" class="form-control" >
+          <label for="autor">Autor(es)</label>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="text" formControlName="titulo" class="form-control" >
+          <label for="titulo">Titulo</label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row g-2 p-3">
+
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="text" formControlName="materia" class="form-control" >
+          <label for="materia">Materia(s)</label>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="text" formControlName="pClave" class="form-control" >
+          <label for="pClave">Palabra(s) clave</label>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="text" formControlName="aConocimiento" class="form-control" >
+          <label for="aConocimiento">Area(s) conocimiento</label>
+        </div>
+      </div>
+
+    </div>
+    <div class="row g-2 p-3">
+
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="text" formControlName="coleccion" class="form-control" >
+          <label for="coleccion">Coleccion</label>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="text" formControlName="tema" class="form-control" >
+          <label for="tema">Tema(s)</label>
+        </div>
+      </div>
+      <div class="col-md">     
+        <div class="input-group">
+          <input class="form-control" formControlName="fecha" placeholder="yyyy-mm-dd"   ngbDatepicker
+            #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn calendar" (click)="d.toggle()" type="button">
+              <img src="../assets/img/calendar.png" height="45">
+            </button>
+          </div>
+        </div>        
+    </div>
+    </div>
+    <div class="p-3 row g-3">
+
+      <div class="input-group col-auto  mb-3">
+        <span class="input-group-text">Observaciones</span>
+        <textarea class="form-control" formControlName="observaciones" aria-label="With textarea"></textarea>
+
+      </div>
+      <div class="col-auto">
+        <!-- routerLink="/"-->
+        <button type="submit" class="btn btn-danger" (click)="onSubmit()">Crear</button>
+      </div>
+    </div>
+  </div>
+</form>
+<hr />
+<pre>Registro: {{ rdfJson | json }}</pre>
+
+

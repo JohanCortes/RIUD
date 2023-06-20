@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row p-4" >
+        <div class="col-sm-6 p-2" *ngFor="let RecursoEducativo of RecursosEducativos">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{RecursoEducativo.title}}</h5>
+                    <p class="card-text">{{RecursoEducativo.creator}}</p>
+                    <p class="card-text">{{RecursoEducativo.abstract}}</p>
+                    <a class="btn">Ir al recurso</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="container  my-5">
+
+    <div class="card px-5 pb-3">
+        <h5 class="card-title pt-2">Consultar recurso educativo <svg xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-report-search" width="32" height="32" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" />
+                <path d="M18 12v-5a2 2 0 0 0 -2 -2h-2" />
+                <rect x="8" y="3" width="6" height="4" rx="2" />
+                <path d="M8 11h4" />
+                <path d="M8 15h3" />
+                <circle cx="16.5" cy="17.5" r="2.5" />
+                <path d="M18.5 19.5l2.5 2.5" />
+            </svg></h5>
+        <form [formGroup]="consultaForm" id="form">
+
+            <div class="mb-3">
+                <label for="inputContributor" class="form-label fw-bold">Colaborador</label>
+                <input type="text" class="form-control" id="inputContributor" placeholder="contributor"
+                    formControlName="contributor" data-prefix="dc">
+            </div>
+            <div class="mb-3">
+                <label for="inputCreator" class="form-label fw-bold">Creador</label>
+                <input type="text" class="form-control" id="inputCreator" placeholder="creator"
+                    formControlName="creator" data-prefix="dc">
+            </div>
+            <div class="mb-3">
+                <label for="inputFecha" class="form-label fw-bold">Fecha</label>
+                <input type="date" class="form-control" id="inputFecha" formControlName="date" data-prefix="dc">
+            </div>
+            <div class="mb-3">
+                <label for="inputLanguage" class="form-label fw-bold">Lenguaje</label>
+                <input type="text" class="form-control" id="inputLanguage" placeholder="language"
+                    formControlName="language" data-prefix="dc">
+            </div>
+            <div class="mb-3">
+                <label for="inputPublisher" class="form-label fw-bold">Editor</label>
+                <input type="text" class="form-control" id="inputPublisher" placeholder="publisher"
+                    formControlName="publisher" data-prefix="dc">
+            </div>
+            <div class="mb-3">
+                <label for="inputAbstract" class="form-label fw-bold">abstract</label>
+                <input type="text" class="form-control" id="inputAbstract" placeholder="abstract"
+                    formControlName="abstract" data-prefix="dcterms">
+            </div>
+            <div class="mb-3">
+                <label for="inputAvaible" class="form-label fw-bold">Disponible</label>
+                <input type="text" class="form-control" id="inputAvaible" placeholder="avaible"
+                    formControlName="avaible" data-prefix="dcterms">
+            </div>
+            <div class="mb-3">
+                <label for="inputHasPart" class="form-label fw-bold">hasPart</label>
+                <input type="text" class="form-control" id="inputHasPart" placeholder="hasPart"
+                    formControlName="hasPart" data-prefix="dcterms">
+            </div>
+            <div class="mb-3">
+                <label for="inputIssued" class="form-label fw-bold">Emitido</label>
+                <input type="text" class="form-control" id="inputIssued" placeholder="issued" formControlName="issued"
+                    data-prefix="dcterms">
+            </div>
+            <div class="mb-3">
+                <label for="inputTitle" class="form-label fw-bold">Titulo</label>
+                <input type="text" class="form-control" id="inputTitle" placeholder="title" formControlName="title"
+                    data-prefix="dcterms">
+            </div>
+            <a type="submit" id="boton1" class="btn btn-success">Consultar</a>
+            <br><br>
+            <a id="boton2" class="btn btn-success">Graficar</a>
+
+
+
+        </form>
+        {{consultaForm.value | json }}
+    </div>
+</div>

@@ -23,7 +23,7 @@ export class ItemComponent implements OnInit {
       grafo: 'Tekhnê [199]'
     };
   }
-  local = "192.168.0.4";
+  local = "192.168.20.74";
   portF = "3030";
   portD = "8080";
   cargar = async (url: RequestInfo) => {

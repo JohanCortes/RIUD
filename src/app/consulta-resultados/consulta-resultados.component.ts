@@ -15,7 +15,7 @@ export class ConsultaResultadosComponent implements OnInit {
 
 
   }
-  local = "192.168.0.4";
+  local = "192.168.20.74";
   portF = "3030";
   portD = "8080";
   cargar = async (url: RequestInfo) => {
@@ -46,7 +46,7 @@ export class ConsultaResultadosComponent implements OnInit {
       if (e.target.className === 'btn') {
         e.preventDefault();
         e.stopPropagation();
-        window.open(`http://192.168.0.4:4200/itemComp?t=${e.target.parentElement.firstElementChild.textContent}`, "_self");
+        window.open(`http://${this.local}:4200/itemComp?t=${e.target.parentElement.firstElementChild.textContent}`, "_self");
 
 
 

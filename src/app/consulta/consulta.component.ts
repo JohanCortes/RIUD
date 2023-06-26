@@ -27,7 +27,7 @@ export class ConsultaComponent implements OnInit {
       title: ['']
     })
   }
-  local = "192.168.0.4";
+  local = "192.168.20.74";
   portF = "3030";
   portD = "8080";
   cargar = async (url: RequestInfo) => {
@@ -99,7 +99,7 @@ export class ConsultaComponent implements OnInit {
       while (url.indexOf("#") > -1) {
         url = url.replace("#", "%23");
       }
-      window.open("http://192.168.0.4:4200/conReComp?" + `p=${url}`, "_self");
+      window.open(`http://${this.local}:4200/conReComp?` + `p=${url}`, "_self");
     });
 
     document.getElementById("boton2")?.addEventListener("click", async (e) => {

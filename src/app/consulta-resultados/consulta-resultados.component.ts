@@ -47,9 +47,6 @@ export class ConsultaResultadosComponent implements OnInit {
         e.preventDefault();
         e.stopPropagation();
         window.open(`http://${this.local}:4200/itemComp?t=${e.target.parentElement.firstElementChild.textContent}`, "_self");
-
-
-
       }
     });
 

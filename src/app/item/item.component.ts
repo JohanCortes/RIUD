@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Sanitizer } from '@angular/core';
 import { MDato } from '../models/mDato';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-item',
@@ -11,7 +12,7 @@ export class ItemComponent implements OnInit {
   dato: MDato;
 
 
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
     this.dato = {
       titulo: 'Más que basura en el Relleno Sanitario Doña Juana',
       title: 'More than garbage at the Doña Juana Landfill',
@@ -23,7 +24,9 @@ export class ItemComponent implements OnInit {
       grafo: 'Tekhnê [199]'
     };
   }
+  safeURL: any;
   local = "192.168.20.74";
+  //local = "10.20.193.32";
   portF = "3030";
   portD = "8080";
   cargar = async (url: RequestInfo) => {
@@ -108,6 +111,8 @@ export class ItemComponent implements OnInit {
       this.dato.autor = [obj.creator.value];
       this.dato.resumen = obj.abstract.value;
       this.dato.abstract = obj.date.value.split('T')[0];
+      this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(obj.hasPart.value);
+      console.log("safeURL: ", this.safeURL);
       this.dato.uri = [obj.hasPart.value];
       this.dato.enlace = obj.uri.value;
       this.dato.grafo = "https://www.ldf.fi/service/rdf-grapher?rdf=" +

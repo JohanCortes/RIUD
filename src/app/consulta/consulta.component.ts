@@ -28,6 +28,7 @@ export class ConsultaComponent implements OnInit {
     })
   }
   local = "192.168.20.74";
+  //local = "10.20.193.32";
   portF = "3030";
   portD = "8080";
   cargar = async (url: RequestInfo) => {

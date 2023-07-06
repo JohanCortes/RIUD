@@ -1,0 +1,21 @@
+<form class="form-help" (submit)="sendEmail($event)">
+    <div class="loaderForm" *ngIf="mostrarDivLoader">
+        <img src="../../assets/img/Loader.svg" class="svgLoader" *ngIf="mostrarLoader" alt="">
+        <img src="../../assets/img/check-solid.svg" class="svgCheck" *ngIf="mostrarCheck" alt="">
+    </div>
+    <strong>Help Desk</strong>
+    <div class="helpDivNombre">
+        <label for="helpInputNombre">Nombre</label>
+        <input id="helpInputNombre" name="user_name" type="text">
+    </div>
+    <div class="helpDivEmail">
+        <label for="helpInputEmail">Email</label>
+        <input id="helpInputEmail" name="user_email" type="text">
+    </div>
+
+    <div class="helpDivObservaciones">
+        <label for="helpTextObservaciones">Observaciones</label>
+        <textarea name="message" id="helpTextObservaciones" cols="30" rows="10"></textarea>
+    </div>
+    <input class="btnEnviar" type="submit" value="Enviar"/>
+</form>

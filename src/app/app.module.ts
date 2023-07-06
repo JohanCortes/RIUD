@@ -22,6 +22,9 @@ import { LoginComponent } from './login/login.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ConsultaResultadosComponent } from './consulta-resultados/consulta-resultados.component';
+import { FormHelpComponent } from './form-help/form-help.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,8 @@ import { ConsultaResultadosComponent } from './consulta-resultados/consulta-resu
     FooterComponent,
     LoginComponent,
     ItemComponent,
-    ConsultaResultadosComponent
+    ConsultaResultadosComponent,
+    FormHelpComponent
   ],
   imports: [
     AngularFireAuthModule,
@@ -46,6 +50,7 @@ import { ConsultaResultadosComponent } from './consulta-resultados/consulta-resu
     ReactiveFormsModule,
     PdfViewerModule,
     NgbModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot([
       { path: 'updateComp', component: UpdateComponent },
       { path: 'itemComp', component: ItemComponent },
@@ -57,6 +62,7 @@ import { ConsultaResultadosComponent } from './consulta-resultados/consulta-resu
       { path: 'conReComp', component: ConsultaResultadosComponent },
 
     ]),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

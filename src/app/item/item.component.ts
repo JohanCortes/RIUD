@@ -26,8 +26,8 @@ export class ItemComponent implements OnInit {
     };
   }
   safeURL: any;
-  local = "192.168.20.74";
-  //local = "10.20.193.32";
+  //local = "192.168.20.74";
+  local = "10.20.193.35";
   portF = "3030";
   portD = "8080";
   cargar = async (url: RequestInfo) => {
@@ -39,25 +39,6 @@ export class ItemComponent implements OnInit {
     return q;
   };
 
-  public forceDownload(url: string, fileName: string): void {
-    fetch(url, { method: 'GET', headers: {
-      'Content-Type': 'application/pdf',
-      'Accept': 'application/pdf',
-      'Access-Control-Allow-Origin': 'no-cors'
-    } })
-      .then(response => response.blob())
-      .then(blob => {
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = fileName;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(link.href);
-      });
-  }
-
   ngOnInit(): void {
     let p = new URLSearchParams(window.location.search),
       title = p.get('t');
@@ -67,25 +48,9 @@ export class ItemComponent implements OnInit {
       QGraphs.results.bindings.forEach((r: any) => {
         Graphs += `\nFROM <${r["g"].value}>`;
       });
-      let Res: any = await this.cargar(`http://${this.local}:${this.portF}/dspace/sparql?query=` + encodeURIComponent(`
-        PREFIX dcterms: <http://purl.org/dc/terms/>
-        PREFIX dc:      <http://purl.org/dc/elements/1.1/> 
-        SELECT * ${Graphs}
-        WHERE {
-          ?uri dc:contributor ?contributor.
-          ?uri dc:creator ?creator.
-          ?uri dc:date ?date.
-          ?uri dc:language ?language.
-          ?uri dc:publisher ?publisher.
-          ?uri dcterms:abstract ?abstract.
-          ?uri dcterms:available ?available.
-          ?uri dcterms:hasPart ?hasPart.
-          ?uri dcterms:issued ?issued.
-          ?uri dcterms:title ?title.
-          ?uri dcterms:bibliographicCitation ?citation.
-          FILTER regex(?title, "${title}", "i")
-        } limit 1
-    `)),
+      let Res: any = await this.cargar(
+        `http://${this.local}:${this.portF}/dspace/sparql?query=` + encodeURIComponent(`PREFIX dcterms: <http://purl.org/dc/terms/> PREFIX dc: <http://purl.org/dc/elements/1.1/> SELECT * ${Graphs} WHERE { ?uri dc:contributor ?contributor. ?uri dc:creator ?creator. ?uri dc:date ?date. ?uri dc:language ?language. ?uri dc:publisher ?publisher. ?uri dcterms:abstract ?abstract. ?uri dcterms:available ?available. ?uri dcterms:hasPart ?hasPart. ?uri dcterms:issued ?issued. ?uri dcterms:title ?title. ?uri dcterms:bibliographicCitation ?citation. FILTER regex(?title, "${title}", "i") } limit 1`
+        )),
         rdf: any = {};
       Res.results.bindings.forEach((r: any) => {
         if (!rdf[r.uri.value]) rdf[r.uri.value] = {};
@@ -143,6 +108,25 @@ export class ItemComponent implements OnInit {
         a.innerHTML = this.dato.grafo.substring(0, 70) + "...";
       }
 
+    });
+    document.getElementById("preview")?.addEventListener("click", async (e) => {
+      e.preventDefault();
+      let url = "http://10.20.193.35:5126/?url=" + this.dato.uri[0];
+      this.cargar(url).then((res) => {
+        console.log("res", res);
+        let $viewer = document.getElementById("viewer"),
+          $iframe = document.createElement("iframe"),
+          $modal = document.getElementById("pdfModal");
+        $iframe.setAttribute("src", "../../assets/doc/doc-1-15.pdf");
+        $viewer?.appendChild($iframe);
+        $iframe.style.width = "100%";
+        $iframe.style.height = "520px";
+        $modal?.style.setProperty("display", "block");
+      });
+    });
+    document.getElementById("closeview")?.addEventListener("click", (e) => {
+      let $modal = document.getElementById("pdfModal");
+      $modal?.style.setProperty("display", "none");
     });
   }
 }

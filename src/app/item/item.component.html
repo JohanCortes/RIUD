@@ -49,10 +49,20 @@
         </div>
         <div class="col-4" style="background-color: gainsboro; padding: 0;">
             <!-- <iframe [src]="safeURL" type="application/pdf" style="width: 100%; height: 100%;" frameBorder="0"></iframe>
-             -->
-             <object [data]="safeURL" type="application/pdf" style="width: 100%; height: 100%;"></object>
+                <object [data]="safeURL" type="application/pdf" style="width: 100%; height: 100%;"></object>
+                <a [href]="safeURL" download="doc.pdf" class="btn btn-success">Descargar</a>
+            -->
+            <button (click)="forceDownload(dato.uri[0], 'nombre-archivo.pdf')">Descargar</button>
         </div>
         <hr>
+        <div class="row m-4">
+            <h3 class="titulo">
+                Citación
+            </h3>
+            <h4>
+                {{dato.citacion}}
+            </h4>
+        </div>
         <div class="row m-4">
             <h3 class="titulo">
                 Enlaces

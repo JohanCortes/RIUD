@@ -7,4 +7,5 @@ export class MDato{
     enlace:string='';
     uri:string[]=[];
     grafo:string='';
+    citacion:string='';
 };

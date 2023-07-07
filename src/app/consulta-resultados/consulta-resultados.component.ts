@@ -40,7 +40,11 @@ export class ConsultaResultadosComponent implements OnInit {
         }
         this.RecursosEducativos.push(e);
       });
-      //console.log(this.RecursosEducativos);
+      console.log(this.RecursosEducativos);
+    }
+    if(this.RecursosEducativos.length==0){
+      document.querySelector(".not-found")?.classList.remove("hide");
+      console.log("no hay resultados");
     }
 
     document.addEventListener('click', async (e: any) => {

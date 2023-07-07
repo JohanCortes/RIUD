@@ -21,7 +21,8 @@ export class ItemComponent implements OnInit {
       abstract: 'This article details the mismanagement of organic waste and other residues of different kinds that arrive at the Doña Juana Landfill. Bad procedures and bad decisions have been identified in the problem due to the area where it is located and the design of the landfill. The recognition of all types of waste that arrive at the sanitary landfill should be done, and based on the conflicts that have been generated inside and outside the landfill, a better solution should be sought, so that the environmental impact is as small as possible, and the quality of life of the families that live in the periphery should be improved.',
       enlace: 'https://revistas.udistrital.edu.co/index.php/tekhne/article/view/16679',
       uri: ['http://hdl.handle.net/11349/27468', 'http://hdl.handle.net/11349/27468', 'http://hdl.handle.net/11349/27468'],
-      grafo: 'Tekhnê [199]'
+      grafo: 'Tekhnê [199]',
+      citacion: ''
     };
   }
   safeURL: any;
@@ -38,6 +39,24 @@ export class ItemComponent implements OnInit {
     return q;
   };
 
+  public forceDownload(url: string, fileName: string): void {
+    fetch(url, { method: 'GET', headers: {
+      'Content-Type': 'application/pdf',
+      'Accept': 'application/pdf',
+      'Access-Control-Allow-Origin': 'no-cors'
+    } })
+      .then(response => response.blob())
+      .then(blob => {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+      });
+  }
 
   ngOnInit(): void {
     let p = new URLSearchParams(window.location.search),
@@ -63,6 +82,7 @@ export class ItemComponent implements OnInit {
           ?uri dcterms:hasPart ?hasPart.
           ?uri dcterms:issued ?issued.
           ?uri dcterms:title ?title.
+          ?uri dcterms:bibliographicCitation ?citation.
           FILTER regex(?title, "${title}", "i")
         } limit 1
     `)),
@@ -112,9 +132,9 @@ export class ItemComponent implements OnInit {
       this.dato.resumen = obj.abstract.value;
       this.dato.abstract = obj.date.value.split('T')[0];
       this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(obj.hasPart.value);
-      console.log("safeURL: ", this.safeURL);
       this.dato.uri = [obj.hasPart.value];
       this.dato.enlace = obj.uri.value;
+      this.dato.citacion = obj.citation.value;
       this.dato.grafo = "https://www.ldf.fi/service/rdf-grapher?rdf=" +
         encodeURIComponent(JSON.stringify(rdf)) +
         "&from=json";
@@ -122,6 +142,7 @@ export class ItemComponent implements OnInit {
       if (a) {
         a.innerHTML = this.dato.grafo.substring(0, 70) + "...";
       }
+
     });
   }
 }

@@ -5,3 +5,15 @@
   
     border-bottom:2px solid gray;
 }
+
+/* .buttons{
+    display: flex;
+    background-color: gainsboro; padding: 0;
+    direction: row; 
+} */
+
+.btn-success{
+    display: block;
+    margin: 2rem;
+    font-weight: bold;
+}

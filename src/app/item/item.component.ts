@@ -27,7 +27,7 @@ export class ItemComponent implements OnInit {
   }
   safeURL: any;
   //local = "192.168.20.74";
-  local = "10.20.193.35";
+  local = "192.168.20.74";
   portF = "3030";
   portD = "8080";
   cargar = async (url: RequestInfo) => {
@@ -109,20 +109,45 @@ export class ItemComponent implements OnInit {
       }
 
     });
-    document.getElementById("preview")?.addEventListener("click", async (e) => {
+    document.getElementById("preview")?.addEventListener("click", (e) => {
       e.preventDefault();
-      let url = "http://10.20.193.35:5126/?url=" + this.dato.uri[0];
-      this.cargar(url).then((res) => {
-        console.log("res", res);
+      let url = `http://${this.local}:5126/?url=` + this.dato.uri[0];
+
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "accept": "text/plain"
+        }
+      }).then((res) => res.text()).then(res => {
+        console.log(res);
         let $viewer = document.getElementById("viewer"),
           $iframe = document.createElement("iframe"),
-          $modal = document.getElementById("pdfModal");
+          $modal = document.getElementById("pdfModal"),
+          name:any = this.dato.uri[0].split('/');
+        name = decodeURI(name[name.length - 1]).replace(".", "-1-15.");
+        name = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        $iframe.setAttribute("src", `../../assets/doc/${name}`);
+        $viewer?.firstElementChild?.remove();
+        $viewer?.appendChild($iframe);
+        $iframe.style.width = "100%";
+        $iframe.style.height = "520px";
+        $modal?.style.setProperty("display", "block");
+      })
+
+
+
+      /* this.cargar(url).then((res) => {
+        let $viewer = document.getElementById("viewer"),
+          $iframe = document.createElement("iframe"),
+          $modal = document.getElementById("pdfModal"),
+          name = this.dato.uri[0].split('/');
+        console.log("res:", res, "name:", name);
         $iframe.setAttribute("src", "../../assets/doc/doc-1-15.pdf");
         $viewer?.appendChild($iframe);
         $iframe.style.width = "100%";
         $iframe.style.height = "520px";
         $modal?.style.setProperty("display", "block");
-      });
+      }); */
     });
     document.getElementById("closeview")?.addEventListener("click", (e) => {
       let $modal = document.getElementById("pdfModal");

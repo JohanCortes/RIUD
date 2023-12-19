@@ -1,8 +1,6 @@
 # RIUD
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
-Front-end for the document repository system based on linked open data.
-Connection with DSpace and Fuseki.
+Front-end for the document repository system based on linked open data, connection with DSpace and Fuseki. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
 
 ## Development server
 
